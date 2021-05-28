@@ -1,0 +1,26 @@
+{
+  "name": "react-seo-be",
+  "version": "1.0.0",
+  "description": "React SEO server",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "npm run clean && node node_modules/typescript/bin/tsc",
+    "clean": "rm -rf dist/*",
+    "serve": "node .",
+    "start": "npm run tsc && npm run serve"
+  },
+  "author": "m0cs",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.12",
+    "@types/node": "15.6.1",
+    "typescript": "4.3.2"
+  },
+  "engines": {
+    "node": "12.22.1"
+  }
+}
