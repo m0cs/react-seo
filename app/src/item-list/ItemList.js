@@ -16,6 +16,8 @@ class ItemList extends Component {
     this.state = { items: [] };
   }
 
+  // Component methods
+
   componentDidMount() {
     const { like } = this.props;
     if (!!like) {
@@ -37,9 +39,13 @@ class ItemList extends Component {
     return <div className="list-container">{rows}</div>;
   }
 
+  // Handlers
+
   handleRowClick(itemId) {
     this.props.onItemSelect(itemId);
   }
+
+  // Custom methods
 
   listItems(like) {
     const itemsApi = new ItemListApi();

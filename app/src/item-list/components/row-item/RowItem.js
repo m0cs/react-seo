@@ -10,6 +10,8 @@ class RowItem extends Component {
     this.handleRowClick = this.handleRowClick.bind(this);
   }
 
+  // Component methods
+
   render() {
     const { item } = this.props;
 
@@ -28,6 +30,8 @@ class RowItem extends Component {
       </div>
     );
   }
+
+  // Handlers
 
   handleRowClick(itemId, event) {
     this.props.onRowClick(itemId);

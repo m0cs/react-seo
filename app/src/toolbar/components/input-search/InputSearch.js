@@ -15,6 +15,8 @@ class InputSearch extends Component {
     };
   }
 
+  // Component methods
+
   render() {
     return (
       <div className="InputSearch-container">
@@ -37,6 +39,8 @@ class InputSearch extends Component {
     );
   }
 
+  // Handlers
+
   handleKeyUp(event) {
     const ENTER_KEY_CODE = 13;
     // Emit event on press Enter key.
@@ -54,6 +58,8 @@ class InputSearch extends Component {
   handleClickSearchIcon() {
     this.props.onSearchChange(this.state.value);
   }
+
+  // Custom methods
 
   clear() {
     this.setState({

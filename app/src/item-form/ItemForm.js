@@ -17,6 +17,8 @@ class ItemForm extends Component {
     };
   }
 
+  // Component methods
+
   componentDidMount() {
     const { itemId } = this.props;
 
@@ -53,6 +55,8 @@ class ItemForm extends Component {
       </div>
     );
   }
+
+  // Custom methods
 
   findItemById(itemId) {
     const itemApi = new ItemFormApi();

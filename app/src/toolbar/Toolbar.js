@@ -13,6 +13,8 @@ class Toolbar extends Component {
     this.SearchRef = createRef();
   }
 
+  // Component methods
+
   render() {
     return (
       <header className="Toolbar-header">
@@ -21,6 +23,8 @@ class Toolbar extends Component {
       </header>
     );
   }
+
+  // Handlers
 
   handleSearchChange(value) {
     this.props.onSearch(value);
