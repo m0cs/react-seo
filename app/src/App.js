@@ -18,9 +18,13 @@ function App() {
     history.push(`/items/${itemId}`);
   }
 
+  function handleNavigateToHome() {
+    history.push('/');
+  }
+
   return (
     <div className="App">
-      <Toolbar onSearch={handleSearch} />
+      <Toolbar onNavigateToHome={handleNavigateToHome} onSearch={handleSearch} />
       <div className="App-content">
         <Switch>
           <Route exact path="/items">

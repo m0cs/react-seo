@@ -15,20 +15,6 @@ class InputSearch extends Component {
     };
   }
 
-  handleKeyUp(event) {
-    const ENTER_KEY_CODE = 13;
-    // Emit event on press Enter key.
-    if (event.keyCode === ENTER_KEY_CODE) {
-      this.props.onSearchChange(event.target.value);
-    }
-  }
-
-  handleOnChange(event) {
-    this.setState({
-      value: event.target.value,
-    });
-  }
-
   render() {
     return (
       <div className="InputSearch-container">
@@ -51,8 +37,28 @@ class InputSearch extends Component {
     );
   }
 
+  handleKeyUp(event) {
+    const ENTER_KEY_CODE = 13;
+    // Emit event on press Enter key.
+    if (event.keyCode === ENTER_KEY_CODE) {
+      this.props.onSearchChange(event.target.value);
+    }
+  }
+
+  handleOnChange(event) {
+    this.setState({
+      value: event.target.value,
+    });
+  }
+
   handleClickSearchIcon() {
     this.props.onSearchChange(this.state.value);
+  }
+
+  clear() {
+    this.setState({
+      value: '',
+    });
   }
 }
 
