@@ -9,7 +9,7 @@ Multi process (# cores) api server.
 * /api/items?q=:query
 * /api/items/:id
 
-### FE
+### APP
 React frontEnd.
 
 ## Running
@@ -22,4 +22,10 @@ Default port: 3000
 #### Different port?
 Override _API\_PORT_ variable
 
-* PORT=3001 npm run start
+* PORT=3006 npm run start
+
+### APP
+* npm install
+* npm run start
+
+Default port: 3001
