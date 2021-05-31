@@ -1,6 +1,7 @@
 import cluster from 'cluster';
 import express from 'express';
 import os from 'os';
+import path from 'path';
 
 import { itemRouter } from './item/item.router';
 import { itemsRouter } from './items/items.router';
@@ -22,13 +23,22 @@ if (cluster.isMaster) {
   const app = express(),
     port = process.env.API_PORT || 3000;
 
-  //
+  // FE
+  // Serve static files from the React app
+  //To heroku app
+  app.use(express.static(__dirname + '../../../app/build'));
+
   // Items API endpoints
   //
   // List items query endpoint
   app.use('/api/items', itemsRouter);
   // Get item by id endpoint
   app.use('/api/items/', itemRouter);
+
+  //To heroku app url access.
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '../../../app/build/index.html'));
+  });
 
   // Start server
   app.listen(port, () => {
