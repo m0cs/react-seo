@@ -6,12 +6,6 @@ import { ErrorResponse } from '../shared/utils/error-response';
 // Service entity name.
 const ENTITY: string = 'Item';
 
-// External service URL
-// Get item by id url
-const ITEM_URL: string = 'items/';
-// Get item description url
-const ITEM_DESCRIPTION_URL: string = 'description';
-
 // Error messages util
 const errorResponse: ErrorResponse = new ErrorResponse(ENTITY);
 
@@ -21,7 +15,7 @@ export class ItemExternalService {
   // External service get item call method
   public getItemById(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const url = `${environment.API_URL}/${ITEM_URL}/${id}`;
+      const url = `${environment.API_URL}/${environment.MELI_ITEM_URL}/${id}`;
       let data: string = '';
 
       const callback = (response: any) => {
@@ -60,7 +54,7 @@ export class ItemExternalService {
   // External service get item description call method
   public getItemDescriptionById(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const url = `${environment.API_URL}/${ITEM_URL}/${id}/${ITEM_DESCRIPTION_URL}`;
+      const url = `${environment.API_URL}/${environment.MELI_ITEM_URL}/${id}/${environment.MELIT_ITEM_DESC_URL}`;
       let data: string = '';
 
       const callback = (response: any) => {

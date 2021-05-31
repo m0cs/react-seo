@@ -1,8 +1,9 @@
 import { Author } from './author.interface';
 import { BaseItem } from './item.interface';
+import { Category } from './category.interface';
 
 export interface ResponseItems {
   author: Author;
-  categories: string[];
+  categories: Category[];
   items: BaseItem[];
 }

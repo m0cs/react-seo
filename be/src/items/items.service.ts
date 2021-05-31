@@ -2,6 +2,7 @@ import { ItemParser } from '../shared/utils/item-parser';
 import { Item } from '../shared/interfaces/item.interface';
 import { ResponseItems } from '../shared/interfaces/response-items.interface';
 import { ItemsExternalService } from './items-external.service';
+import { RawResponseList } from '../shared/interfaces/raw-response-list.interface';
 
 // Item parser util
 const itemParser = ItemParser;
@@ -13,7 +14,7 @@ export const list = (like: string): Promise<ResponseItems> => {
 
   return new Promise((resolve, reject) => {
     listItemsRequest
-      .then((rawItemList: any[]) => {
+      .then((rawItemList: RawResponseList) => {
         const responseItems: ResponseItems = {
           author: {
             name: '',
@@ -22,14 +23,10 @@ export const list = (like: string): Promise<ResponseItems> => {
           categories: [],
           items: [],
         };
-
-        const categories: Set<string> = new Set();
-        const items: Item[] = rawItemList.map((rawItem: any) => {
-          categories.add(rawItem['category_id']);
+        const items: Item[] = rawItemList.items.map((rawItem: any) => {
           return itemParser.RawBaseItemParse(rawItem);
         });
-
-        responseItems.categories = Array.from(categories);
+        responseItems.categories = rawItemList.categories;
         responseItems.items = items;
 
         resolve(responseItems);

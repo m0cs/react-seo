@@ -2,13 +2,13 @@ const https = require('https');
 
 import { environment } from '../environments/environment';
 import { ErrorResponse } from '../shared/utils/error-response';
+import { RawResponseList } from '../shared/interfaces/raw-response-list.interface';
 
 export class ItemsExternalService {
   // Service entity name
   private ENTITY: string = 'Items';
 
   // External service URL
-  private ITEMS_URL: string = 'sites/MLA/search';
 
   // Error messages util
   private errorResponse: ErrorResponse = new ErrorResponse(this.ENTITY);
@@ -16,9 +16,9 @@ export class ItemsExternalService {
   constructor() {}
 
   // External service list items call method
-  public listItems(like: string, limit: number = 4): Promise<any> {
+  public listItems(like: string, limit: number = 4): Promise<RawResponseList> {
     return new Promise((resolve, reject) => {
-      const url = `${environment.API_URL}/${this.ITEMS_URL}?limit=${limit}&q=${like}`;
+      const url = `${environment.API_URL}/${environment.MELI_ITEMS_URL}?limit=${limit}&q=${like}`;
       let data: string = '';
 
       const callback = (response: any) => {
@@ -33,8 +33,25 @@ export class ItemsExternalService {
         response.on('end', () => {
           switch (response.statusCode) {
             case 200:
+              const RESULTS_KEY = 'results';
+              const FILTERS_KEY = 'filters';
+              const CATEGORY_ID = 'category';
+              let categories: any;
+
               const rawItemsList = JSON.parse(data);
-              const results: any[] = rawItemsList['results'];
+              // Get the list of items
+              const items: any[] = rawItemsList[RESULTS_KEY];
+              // Get the list of categoires
+              const filters: any[] = rawItemsList[FILTERS_KEY];
+              const category: any = filters.find((f) => f.id === CATEGORY_ID);
+
+              if (category !== undefined) {
+                categories = category.values;
+              }
+              const results: RawResponseList = {
+                items,
+                categories,
+              };
               resolve(results);
               break;
             case 404:
