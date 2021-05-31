@@ -49,15 +49,26 @@ class ItemList extends Component {
 
   listItems(like) {
     const itemsApi = new ItemListApi();
+    const abortController = new AbortController();
+    const signal = abortController.signal;
 
     if (this.itemsRequest) {
       // abort request, prevent multiple calls
+      abortController.abort();
     }
-    this.itemsRequest = itemsApi.list(like);
-    this.itemsRequest.then((response) => {
-      this.setState({ items: response.items });
-      this.itemsRequest = undefined;
+    this.itemsRequest = itemsApi.list(like, {
+      signal,
     });
+    this.itemsRequest.then(
+      (response) => {
+        this.setState({ items: response.items });
+        this.itemsRequest = undefined;
+      },
+      (rejected) => {
+        this.setState({ items: [] });
+        this.itemsRequest = undefined;
+      }
+    );
   }
 }
 

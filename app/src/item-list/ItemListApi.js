@@ -3,9 +3,14 @@ class ItemListApi {
     this.itemsUrl = '/api/items';
   }
 
-  list(like) {
+  list(like, options) {
     like = like || '';
-    return fetch(`${this.itemsUrl}?q=${like}`).then((res) => res.json());
+    options = options || {};
+    const signal = options.signal;
+    return fetch(`${this.itemsUrl}?q=${like}`, {
+      method: 'get',
+      signal,
+    }).then((res) => res.json());
   }
 }
 
