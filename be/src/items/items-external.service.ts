@@ -16,9 +16,9 @@ export class ItemsExternalService {
   constructor() {}
 
   // External service list items call method
-  public listItems(like: string): Promise<any> {
+  public listItems(like: string, limit: number = 4): Promise<any> {
     return new Promise((resolve, reject) => {
-      const url = `${environment.API_URL}/${this.ITEMS_URL}?q=${like}`;
+      const url = `${environment.API_URL}/${this.ITEMS_URL}?limit=${limit}&q=${like}`;
       let data: string = '';
 
       const callback = (response: any) => {
@@ -35,14 +35,7 @@ export class ItemsExternalService {
             case 200:
               const rawItemsList = JSON.parse(data);
               const results: any[] = rawItemsList['results'];
-              // Limit results # 4
-              const resultsLength = results.length;
-              // Get random results portion.
-              const start =
-                resultsLength > 3 ? Math.floor(Math.random() * results.length) - 4 : resultsLength;
-              const reducedResults: any[] = results.slice(start, start + 4);
-
-              resolve(reducedResults);
+              resolve(results);
               break;
             case 404:
               reject(this.errorResponse.notFoundError());
@@ -58,7 +51,7 @@ export class ItemsExternalService {
         reject(this.errorResponse.badRequestError('invalid_like'));
       }
 
-      https.get(url, callback).end();
+      https.get(url, { forever: true }, callback).end();
     });
   }
 }
