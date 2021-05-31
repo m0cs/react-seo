@@ -1,0 +1,45 @@
+@import '../../../sass/base';
+
+.RowItem-container {
+  align-items: center;
+  background-color: $white;
+  border-bottom: thin solid $grey-1;
+  display: flex;
+  padding: $default-padding;
+  height: 200px;
+
+  .RowItem-image-container {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex: 0.3;
+    height: 160px;
+    justify-content: center;
+    padding: $default-padding;
+    width: 160px;
+
+    .RowItem-image {
+      @include full-image-container;
+    }
+  }
+
+  .RowItem-details {
+    box-sizing: border-box;
+    color: #333;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    padding-top: $default-padding;
+    padding-left: $default-padding;
+    text-align: left;
+
+    .RowItem-title {
+      padding: padding-pow(2) 0;
+    }
+
+    .RowItem-title {
+      cursor: pointer;
+    }
+  }
+}

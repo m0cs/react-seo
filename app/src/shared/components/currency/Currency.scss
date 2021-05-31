@@ -1,0 +1,13 @@
+@import '../../../sass/base';
+
+.Currency-container {
+  font-size: $title-1;
+
+  &.big {
+    font-size: $title-3;
+  }
+
+  .Currency-tag {
+    padding-right: $default-padding;
+  }
+}

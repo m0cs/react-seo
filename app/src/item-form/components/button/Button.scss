@@ -1,0 +1,17 @@
+@import '../../../sass/base';
+
+.button {
+  height: 40px;
+  border-color: transparent;
+  background-color: $blue;
+  color: $white;
+  cursor: pointer;
+  border-radius: $default-border-radius;
+
+  &:hover {
+    background-color: lighten($color: $blue, $amount: 5);
+  }
+  &:active {
+    background-color: darken($color: $blue, $amount: 10);
+  }
+}

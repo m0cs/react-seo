@@ -1,0 +1,67 @@
+@import '../sass/base';
+
+$default-image-width: 400px;
+
+.ItemForm-container {
+  background-color: $white;
+  border-radius: $default-border-radius;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  padding: padding-pow(3);
+}
+
+.ItemForm-right-section,
+.ItemForm-left-section {
+  @include flex-column;
+}
+
+.ItemForm-left-section {
+  flex: 0.7;
+}
+
+.ItemForm-right-section {
+  flex: 0.3;
+}
+
+.ItemForm-image-container {
+  align-items: center;
+  display: flex;
+  flex: 0.6;
+  height: 400px;
+  justify-content: center;
+  width: $default-image-width;
+
+  .ItemForm-image {
+    @include full-image-container;
+  }
+}
+
+.ItemForm-description-container {
+  .ItemForm-description-title {
+    font-size: $title-2;
+    font-weight: 500;
+    padding: padding-pow(6) 0 padding-pow(3);
+    margin: 0;
+  }
+
+  .ItemForm-description {
+    font-size: $subtitle-1;
+  }
+}
+
+.ItemForm-description-container,
+.ItemForm-details-container {
+  @include flex-column;
+  text-align: left;
+
+  .ItemForm-details-title {
+    font-size: $title-1;
+    padding: padding-pow(2) 0;
+  }
+}
+
+Button {
+  margin-top: padding-pow(4);
+}

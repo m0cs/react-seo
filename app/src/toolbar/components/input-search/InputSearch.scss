@@ -1,0 +1,37 @@
+$search-input-height: 35px;
+$search-input-lateral-spacing: 5.5px;
+$search-icon-size: 24px;
+
+.InputSearch-container {
+  display: flex;
+  flex: 2;
+  flex-direction: row-reverse;
+}
+
+.InputSearch-input {
+  border: unset;
+  box-sizing: border-box;
+  height: $search-input-height;
+  flex: 1;
+  text-indent: $search-input-lateral-spacing;
+
+  &:focus-visible {
+    outline: unset;
+  }
+}
+
+.InputSearch-logo-container {
+  align-items: center;
+  background-color: #ebebeb;
+  display: flex;
+  height: $search-input-height;
+  justify-content: center;
+  position: absolute;
+  width: $search-input-height;
+}
+
+.InputSearch-logo {
+  cursor: pointer;
+  height: $search-icon-size;
+  width: $search-icon-size;
+}
