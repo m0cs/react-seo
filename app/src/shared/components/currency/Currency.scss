@@ -1,10 +1,19 @@
 @import '../../../sass/base';
 
 .Currency-container {
+  display: flex;
+
   font-size: $title-1;
 
   &.big {
     font-size: $title-3;
+
+    .Currency-decimals-container {
+      font-size: 18px;
+      .Currency-decimals {
+        vertical-align: sub;
+      }
+    }
   }
 
   .Currency-tag {
