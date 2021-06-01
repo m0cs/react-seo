@@ -1,5 +1,5 @@
 export interface RawResponseList {
   items: any[];
-  categories: any[];
+  categories: any;
   availableCategories?: any[];
 }

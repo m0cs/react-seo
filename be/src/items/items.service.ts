@@ -26,20 +26,25 @@ export const list = (like: string): Promise<ResponseItems> => {
           items: [],
         };
         // not classified response
+        // do againt the call with category filters
         if (rawItemList.availableCategories && rawItemList.availableCategories.length) {
           // get category with most results
           const availableCategories: Category[] = rawItemList.availableCategories;
+
           const COMPARTOR_KEY: string = 'results';
+
           let category: Category = Utils.findHighestValue(availableCategories, COMPARTOR_KEY);
+
           const listItemsByCategory = itemsExternalService.listItems(like, category.id);
-          console.log(category);
 
           listItemsByCategory
-            .then((response) => {
+            .then((response: RawResponseList) => {
+              // Parse items from ML
               const items: Item[] = response.items.map((rawItem: any) => {
                 return itemParser.RawBaseItemParse(rawItem);
               });
-              responseItems.categories = response.categories;
+              // Parse categories from ML
+              responseItems.categories = itemParser.RawItemParseCategories(response);
               responseItems.items = items;
 
               resolve(responseItems);
@@ -48,10 +53,14 @@ export const list = (like: string): Promise<ResponseItems> => {
               reject(error);
             });
         } else {
+          // just one filter request
+
+          // Parse items from ML
           const items: Item[] = rawItemList.items.map((rawItem: any) => {
             return itemParser.RawBaseItemParse(rawItem);
           });
-          responseItems.categories = rawItemList.categories;
+          // Parse categories from ML
+          responseItems.categories = itemParser.RawItemParseCategories(rawItemList);
           responseItems.items = items;
 
           resolve(responseItems);

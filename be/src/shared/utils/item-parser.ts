@@ -1,5 +1,6 @@
 import { Item, BaseItem } from '../interfaces/item.interface';
 import { Price } from '../interfaces/price.interface';
+import { Category } from '../interfaces/category.interface';
 
 // This util class parses MELI json to a kwown one.
 export class ItemParser {
@@ -58,5 +59,15 @@ export class ItemParser {
     };
 
     return price;
+  }
+
+  public static RawItemParseCategories(rawItem: any) {
+    rawItem = rawItem || {};
+    rawItem['categories'] = rawItem['categories'] || {};
+
+    const CATEGORIES_VALUES: string = 'path_from_root';
+    const category = rawItem['categories'][0] || [];
+    const categories = category[CATEGORIES_VALUES];
+    return categories.map((c: Category) => c.name);
   }
 }

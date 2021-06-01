@@ -17,14 +17,20 @@ export class ItemsExternalService {
   constructor() {}
 
   // External service list items call method
-  public listItems(like: string, categoryId?: string, limit: number = 4): Promise<RawResponseList> {
+  public listItems(
+    like: string,
+    categoryId: string = '',
+    limit: number = 4
+  ): Promise<RawResponseList> {
     return new Promise((resolve, reject) => {
       const CATEGORY_ID = 'category';
       let url = `${environment.API_URL}/${environment.MELI_ITEMS_URL}?limit=${limit}&q=${like}`;
       let data: string = '';
 
-      if (categoryId) {
+      if (categoryId !== '') {
+        console.log(url);
         url += `&${CATEGORY_ID}=${categoryId}`;
+        console.log(url);
       }
 
       const callback = (response: any) => {
