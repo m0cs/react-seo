@@ -36,7 +36,7 @@ class ItemList extends Component {
     const rows = this.state.items.map((item) => (
       <RowItem onRowClick={this.handleRowClick} key={item.id} item={item} />
     ));
-    return <div className="list-container">{rows}</div>;
+    return <div className="ItemList-container">{rows}</div>;
   }
 
   // Handlers

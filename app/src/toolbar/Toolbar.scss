@@ -1,6 +1,6 @@
 @import '../sass/base';
 
-.Toolbar-header {
+.Toolbar-header-container {
   align-items: center;
   background-color: $yellow;
   color: $white;
@@ -8,6 +8,11 @@
   height: $toolbar-height;
   justify-content: center;
   padding: 0 $default-content-padding;
+
+  .Toolbar-header {
+    display: flex;
+    @include full-limited-width;
+  }
 }
 
 .Toolbar-logo {

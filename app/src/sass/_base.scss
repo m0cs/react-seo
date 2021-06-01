@@ -21,6 +21,7 @@ $subtitle-1: 14px;
 // sizes
 $toolbar-height: 50px;
 $nav-categories-height: 30px;
+$max-width: 920px;
 
 @mixin full-image-container {
   width: 100%;
@@ -31,6 +32,11 @@ $nav-categories-height: 30px;
 @mixin flex-column {
   display: flex;
   flex-direction: column;
+}
+
+@mixin full-limited-width {
+  max-width: $max-width;
+  width: 100%;
 }
 
 @function padding-pow($multiplier) {

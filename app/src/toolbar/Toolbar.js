@@ -17,9 +17,11 @@ class Toolbar extends Component {
 
   render() {
     return (
-      <header className="Toolbar-header">
-        <img src={logo} onClick={this.handleOnClick} className="Toolbar-logo" alt="logo" />
-        <InputSearch ref={this.SearchRef} onSearchChange={this.handleSearchChange} />
+      <header className="Toolbar-header-container">
+        <div className="Toolbar-header">
+          <img src={logo} onClick={this.handleOnClick} className="Toolbar-logo" alt="logo" />
+          <InputSearch ref={this.SearchRef} onSearchChange={this.handleSearchChange} />
+        </div>
       </header>
     );
   }
