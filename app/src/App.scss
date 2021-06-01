@@ -12,5 +12,5 @@
   flex: 1;
   flex-direction: column;
   min-height: calc(100% - #{$toolbar-height});
-  padding: 5% 15%;
+  padding: 2% $default-content-padding calc(2% + #{$nav-categories-height});
 }

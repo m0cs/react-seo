@@ -2,10 +2,12 @@
 $white: #fff;
 $grey-1: #eee;
 $grey-2: #ebebeb;
+$grey-3: #666;
 $yellow: #fff159;
 $blue: #3483fa;
 // Spacing
 $default-padding: 7.5px;
+$default-content-padding: 10%;
 
 // border radius
 $default-border-radius: 4px;
@@ -18,6 +20,7 @@ $subtitle-1: 14px;
 
 // sizes
 $toolbar-height: 50px;
+$nav-categories-height: 30px;
 
 @mixin full-image-container {
   width: 100%;

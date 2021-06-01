@@ -13,7 +13,7 @@ class ItemList extends Component {
     this.itemsRequest = undefined;
 
     // initialize state.
-    this.state = { items: [] };
+    this.state = { items: [], categories: [] };
   }
 
   // Component methods
@@ -61,11 +61,19 @@ class ItemList extends Component {
     });
     this.itemsRequest.then(
       (response) => {
-        this.setState({ items: response.items });
+        if (response.error) {
+          this.setState({ items: [], categories: [] });
+        } else {
+          this.setState({
+            items: response.items,
+            categories: response.categories,
+          });
+          this.props.onCategoryUpdate(response.categories);
+        }
         this.itemsRequest = undefined;
       },
       (rejected) => {
-        this.setState({ items: [] });
+        this.setState({ items: [], categories: [] });
         this.itemsRequest = undefined;
       }
     );

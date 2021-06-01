@@ -37,7 +37,9 @@ class ItemForm extends Component {
       <div className="ItemForm-container">
         <div className="ItemForm-left-section">
           <div className="ItemForm-image-container">
-            <img className="ItemForm-image" alt="product" src={item.picture} />
+            <div>
+              <img className="ItemForm-image" alt="product" src={item.picture} />
+            </div>
           </div>
           <div className="ItemForm-description-container">
             <div className="ItemForm-description-title">Descripción del producto</div>

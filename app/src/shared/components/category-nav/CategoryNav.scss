@@ -1,0 +1,13 @@
+@import '../../../sass/base';
+
+.CategoryNav-container {
+  color: $grey-3;
+  display: flex;
+  font-size: $subtitle-1;
+  height: $nav-categories-height;
+  text-align: left;
+
+  .CategoryNav-separator {
+    padding: 0 $default-padding;
+  }
+}
