@@ -36,15 +36,9 @@ export const list = (like: string): Promise<ResponseItems> => {
     return responseJson;
   };
 
-  let requestRetry: number = 1;
-
   return new Promise((resolve, reject) => {
     listItemsRequest
       .then((rawItemList: RawResponseList) => {
-        // if already try to search a category, just forget
-        if (requestRetry < 1) {
-          resolve(prepareResponse());
-        }
         // not classified response
         // do againt the call with category filters
         if (rawItemList.availableCategories && rawItemList.availableCategories.length) {
@@ -53,8 +47,6 @@ export const list = (like: string): Promise<ResponseItems> => {
           const COMPARTOR_KEY: string = 'results';
           let category: Category = Utils.findHighestValue(availableCategories, COMPARTOR_KEY);
           const listItemsByCategory = itemsExternalService.listItems(like, category.id);
-
-          requestRetry--;
 
           listItemsByCategory
             .then((response: RawResponseList) => {
