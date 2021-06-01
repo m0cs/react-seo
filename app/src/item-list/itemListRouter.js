@@ -3,14 +3,29 @@ import ItemList from './ItemList';
 
 function ItemListRouter(props) {
   const { search } = useLocation();
-  const queryString = search.replace('?', '');
-  const searchValue = queryString.split('=')[1];
+  // remove ? and split by separator &
+  const queryString = search.replace('?', '').split('&');
+  const searchValue = queryString.find((query) => {
+    const queryArr = query.split('=');
+    const key = queryArr[0];
+    const value = queryArr[1];
+
+    if (key === 'search') {
+      return value;
+    } else {
+      return undefined;
+    }
+  });
 
   function handleItemSelect(item) {
     props.onItemSelect(item);
   }
 
-  return <ItemList like={searchValue} onItemSelect={handleItemSelect} />;
+  if (!searchValue) {
+    return <div></div>;
+  } else {
+    return <ItemList like={searchValue} onItemSelect={handleItemSelect} />;
+  }
 }
 
 export default ItemListRouter;
