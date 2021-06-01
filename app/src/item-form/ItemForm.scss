@@ -55,6 +55,7 @@ $default-image-width: 400px;
 .ItemForm-details-container {
   @include flex-column;
   text-align: left;
+  word-break: break-all;
 
   .ItemForm-details-title {
     font-size: $title-1;
