@@ -48,7 +48,7 @@ class ItemForm extends Component {
           <div className="ItemForm-details-container">
             <Condition condition={item.condition} />
             <div className="ItemForm-details-title">{item.title}</div>
-            <Currency big={true} amount={item.price.amount} currency={item.price.currency} />
+            <Currency big={true} price={item.price} />
             <Button label="Comprar" />
           </div>
         </div>

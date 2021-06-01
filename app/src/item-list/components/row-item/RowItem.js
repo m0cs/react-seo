@@ -21,7 +21,7 @@ class RowItem extends Component {
           <img className="RowItem-image" alt="product" src={item.picture} />
         </div>
         <div className="RowItem-details">
-          <Currency amount={item.price.amount} currency={item.price.currency} />
+          <Currency price={item.price} />
           <div className="RowItem-title">
             <span onClick={(e) => this.handleRowClick(item.id, e)}>{item.title}</span>
           </div>
