@@ -13,6 +13,7 @@ const itemParser = ItemParser;
 export const list = (like: string): Promise<ResponseItems> => {
   const itemsExternalService: ItemsExternalService = new ItemsExternalService();
   const listItemsRequest = itemsExternalService.listItems(like);
+  let requestRetry: number = 1;
 
   return new Promise((resolve, reject) => {
     listItemsRequest
@@ -25,6 +26,11 @@ export const list = (like: string): Promise<ResponseItems> => {
           categories: [],
           items: [],
         };
+
+        // if already try to search a category, just forget
+        if (requestRetry < 1) {
+          resolve(responseItems);
+        }
         // not classified response
         // do againt the call with category filters
         if (rawItemList.availableCategories && rawItemList.availableCategories.length) {
@@ -37,6 +43,7 @@ export const list = (like: string): Promise<ResponseItems> => {
 
           const listItemsByCategory = itemsExternalService.listItems(like, category.id);
 
+          requestRetry--;
           listItemsByCategory
             .then((response: RawResponseList) => {
               // Parse items from ML
