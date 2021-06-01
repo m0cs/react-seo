@@ -28,7 +28,6 @@ export class ItemParser {
       picture: rawItem['thumbnail'],
       condition: rawItem['condition'],
       free_shipping: rawItem['shipping']['free_shipping'],
-      category_id: rawItem['category_id'],
     };
 
     return baseItem;

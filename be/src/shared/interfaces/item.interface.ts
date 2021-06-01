@@ -7,8 +7,6 @@ export interface BaseItem {
   picture?: string;
   condition?: string;
   free_shipping?: boolean;
-  // extra field
-  category_id?: string;
 }
 
 export interface Item extends BaseItem {
