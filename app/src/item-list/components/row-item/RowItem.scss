@@ -19,6 +19,7 @@
     width: 160px;
 
     .RowItem-image {
+      cursor: pointer;
       @include full-image-container;
     }
   }
@@ -35,11 +36,8 @@
     text-align: left;
 
     .RowItem-title {
-      padding: padding-pow(2) 0;
-    }
-
-    .RowItem-title {
       cursor: pointer;
+      padding: padding-pow(2) 0;
     }
   }
 }

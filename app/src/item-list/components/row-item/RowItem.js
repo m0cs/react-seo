@@ -18,12 +18,17 @@ class RowItem extends Component {
     return (
       <div className="RowItem-container">
         <div className="RowItem-image-container">
-          <img className="RowItem-image" alt="product" src={item.picture} />
+          <img
+            className="RowItem-image"
+            alt="product"
+            src={item.picture}
+            onClick={(e) => this.handleRowClick(item.id, e)}
+          />
         </div>
         <div className="RowItem-details">
           <Currency price={item.price} />
-          <div className="RowItem-title">
-            <span onClick={(e) => this.handleRowClick(item.id, e)}>{item.title}</span>
+          <div className="RowItem-title" onClick={(e) => this.handleRowClick(item.id, e)}>
+            <span>{item.title}</span>
           </div>
           <Condition condition={item.condition} />
         </div>
