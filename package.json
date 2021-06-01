@@ -1,0 +1,25 @@
+{
+  "name": "react-seo",
+  "version": "1.0.0",
+  "description": "Heroku package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd app && npm install && npm run build && cd .. && cd be && npm install && npm run build",
+    "start": "node be/dist/index.js",
+    "heroku-postbuild": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m0cs/react-seo.git"
+  },
+  "author": "m0cs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m0cs/react-seo/issues"
+  },
+  "homepage": "https://github.com/m0cs/react-seo#readme",
+  "engines": {
+    "node": "12.x"
+  }
+}

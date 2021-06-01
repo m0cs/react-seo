@@ -13,18 +13,24 @@ Multi process (# cores) api server.
 React frontEnd.
 
 ## Running
-### BE
+### All
+* npm run build
+* npm run start
+
+Default port: 3000
+
+### Only BE
 * npm install
 * npm run start
 
 Default port: 3000
 
 #### Different port?
-Override _API\_PORT_ variable
+Override _PORT_ variable
 
 * PORT=3006 npm run start
 
-### APP
+### Only APP
 * npm install
 * npm run start
 

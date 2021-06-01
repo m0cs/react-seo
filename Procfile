@@ -1,1 +1,1 @@
-web: node be/.
+web: node be/dist/.

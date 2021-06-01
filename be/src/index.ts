@@ -21,12 +21,7 @@ if (cluster.isMaster) {
   });
 } else {
   const app = express(),
-    port = process.env.API_PORT || 3000;
-
-  // FE
-  // Serve static files from the React app
-  //To heroku app
-  app.use(express.static(__dirname + '../../../app/build'));
+    port = process.env.PORT || 3000;
 
   // Items API endpoints
   //
@@ -35,9 +30,11 @@ if (cluster.isMaster) {
   // Get item by id endpoint
   app.use('/api/items/', itemRouter);
 
-  //To heroku app url access.
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '../../../app/build/index.html'));
+  //To heroku app
+  const publicPath = path.join(__dirname, '..', '..', 'app', 'build');
+  app.use(express.static(publicPath));
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(publicPath, 'index.html'));
   });
 
   // Start server

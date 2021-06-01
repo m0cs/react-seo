@@ -17,8 +17,7 @@
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm install --prefix ../be && npm run build --prefix ../be"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
