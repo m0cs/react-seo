@@ -47,7 +47,10 @@ $default-image-width: 400px;
   }
 
   .ItemForm-description {
+    font-family: inherit;
     font-size: $subtitle-1;
+    margin: 0;
+    white-space: break-spaces;
   }
 }
 

@@ -41,7 +41,7 @@ class ItemForm extends Component {
           </div>
           <div className="ItemForm-description-container">
             <div className="ItemForm-description-title">Descripción del producto</div>
-            <div className="ItemForm-description">{item.description}</div>
+            <pre className="ItemForm-description">{item.description}</pre>
           </div>
         </div>
         <div className="ItemForm-right-section">
