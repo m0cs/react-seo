@@ -13,64 +13,59 @@ const itemParser = ItemParser;
 export const list = (like: string): Promise<ResponseItems> => {
   const itemsExternalService: ItemsExternalService = new ItemsExternalService();
   const listItemsRequest = itemsExternalService.listItems(like);
+
+  const prepareResponse = (response?: RawResponseList): ResponseItems => {
+    const responseJson: ResponseItems = {
+      author: {
+        name: 'Pablo',
+        lastname: 'de Sosa',
+      },
+      categories: [],
+      items: [],
+    };
+
+    if (!response) return responseJson;
+
+    const items: Item[] = response.items.map((rawItem: any) => {
+      return itemParser.RawBaseItemParse(rawItem);
+    });
+    // Parse categories from ML
+    responseJson.categories = itemParser.RawItemParseCategories(response);
+    responseJson.items = items;
+
+    return responseJson;
+  };
+
   let requestRetry: number = 1;
 
   return new Promise((resolve, reject) => {
     listItemsRequest
       .then((rawItemList: RawResponseList) => {
-        const responseItems: ResponseItems = {
-          author: {
-            name: '',
-            lastname: '',
-          },
-          categories: [],
-          items: [],
-        };
-
         // if already try to search a category, just forget
         if (requestRetry < 1) {
-          resolve(responseItems);
+          resolve(prepareResponse());
         }
         // not classified response
         // do againt the call with category filters
         if (rawItemList.availableCategories && rawItemList.availableCategories.length) {
           // get category with most results
           const availableCategories: Category[] = rawItemList.availableCategories;
-
           const COMPARTOR_KEY: string = 'results';
-
           let category: Category = Utils.findHighestValue(availableCategories, COMPARTOR_KEY);
-
           const listItemsByCategory = itemsExternalService.listItems(like, category.id);
 
           requestRetry--;
+
           listItemsByCategory
             .then((response: RawResponseList) => {
-              // Parse items from ML
-              const items: Item[] = response.items.map((rawItem: any) => {
-                return itemParser.RawBaseItemParse(rawItem);
-              });
-              // Parse categories from ML
-              responseItems.categories = itemParser.RawItemParseCategories(response);
-              responseItems.items = items;
-
-              resolve(responseItems);
+              resolve(prepareResponse(response));
             })
             .catch((error) => {
               reject(error);
             });
         } else {
           // just one filter request
-
-          // Parse items from ML
-          const items: Item[] = rawItemList.items.map((rawItem: any) => {
-            return itemParser.RawBaseItemParse(rawItem);
-          });
-          // Parse categories from ML
-          responseItems.categories = itemParser.RawItemParseCategories(rawItemList);
-          responseItems.items = items;
-
-          resolve(responseItems);
+          resolve(prepareResponse(rawItemList));
         }
       })
       .catch((error) => reject(error));
