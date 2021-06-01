@@ -49,7 +49,7 @@ export class ItemParser {
     rawItem = rawItem || {};
     rawItem['price'] = rawItem['price'] || {};
 
-    const decimals: number = Math.trunc(((rawItem['price'] * 10) % 10) * 10);
+    const decimals: number = Math.round(((rawItem['price'] * 10) % 10) * 10);
 
     const price: Price = {
       currency: rawItem['currency_id'] || '0',
