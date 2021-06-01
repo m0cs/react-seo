@@ -63,10 +63,12 @@ export class ItemParser {
 
   public static RawItemParseCategories(rawItem: any) {
     rawItem = rawItem || {};
-    rawItem['categories'] = rawItem['categories'] || {};
+    rawItem['categories'] = rawItem['categories'] || [];
+
+    if (!rawItem['categories'].length) return [];
 
     const CATEGORIES_VALUES: string = 'path_from_root';
-    const category = rawItem['categories'][0] || [];
+    const category = rawItem['categories'][0] || {};
     const categories = category[CATEGORIES_VALUES];
     return categories.map((c: Category) => c.name);
   }

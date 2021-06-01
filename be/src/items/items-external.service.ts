@@ -28,9 +28,7 @@ export class ItemsExternalService {
       let data: string = '';
 
       if (categoryId !== '') {
-        console.log(url);
         url += `&${CATEGORY_ID}=${categoryId}`;
-        console.log(url);
       }
 
       const callback = (response: any) => {
