@@ -3,6 +3,7 @@ const https = require('https');
 import { environment } from '../environments/environment';
 import { ErrorResponse } from '../shared/utils/error-response';
 import { RawResponseList } from '../shared/interfaces/raw-response-list.interface';
+import { Category } from '../shared/interfaces/category.interface';
 
 export class ItemsExternalService {
   // Service entity name
@@ -16,10 +17,15 @@ export class ItemsExternalService {
   constructor() {}
 
   // External service list items call method
-  public listItems(like: string, limit: number = 4): Promise<RawResponseList> {
+  public listItems(like: string, categoryId?: string, limit: number = 4): Promise<RawResponseList> {
     return new Promise((resolve, reject) => {
-      const url = `${environment.API_URL}/${environment.MELI_ITEMS_URL}?limit=${limit}&q=${like}`;
+      const CATEGORY_ID = 'category';
+      let url = `${environment.API_URL}/${environment.MELI_ITEMS_URL}?limit=${limit}&q=${like}`;
       let data: string = '';
+
+      if (categoryId) {
+        url += `&${CATEGORY_ID}=${categoryId}`;
+      }
 
       const callback = (response: any) => {
         response.on('data', (chunk: string) => {
@@ -35,16 +41,16 @@ export class ItemsExternalService {
             case 200:
               const RESULTS_KEY = 'results';
               const FILTERS_KEY = 'filters';
-              const CATEGORY_ID = 'category';
+              const AVAILABLE_FILTERS = 'available_filters';
               let categories: any;
 
               const rawItemsList = JSON.parse(data);
               // Get the list of items
               const items: any[] = rawItemsList[RESULTS_KEY];
-              // Get the list of categoires
+              // Get the list of categories
               const filters: any[] = rawItemsList[FILTERS_KEY];
               const category: any = filters.find((f) => f.id === CATEGORY_ID);
-
+              const availableFilters: any[] = rawItemsList[AVAILABLE_FILTERS];
               if (category !== undefined) {
                 categories = category.values;
               }
@@ -52,6 +58,18 @@ export class ItemsExternalService {
                 items,
                 categories,
               };
+              if (!filters.length) {
+                // Caso especial
+                // En caso de haber buscado una palabra sin clasificación,
+                //  busco por la de mayor resultados, y realizo la búsqueda nuevamente.
+                const availableCategories: any = availableFilters.find(
+                  (ac) => ac.id === CATEGORY_ID
+                );
+                // Get category filter.
+                results.availableCategories = availableCategories
+                  ? availableCategories['values']
+                  : undefined;
+              }
               resolve(results);
               break;
             case 404:
