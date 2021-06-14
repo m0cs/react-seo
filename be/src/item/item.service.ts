@@ -18,10 +18,7 @@ export const findItemById = (id: string): Promise<ResponseItem> => {
     Promise.all([rawItemRequest, rawItemDescriptionRequest])
       .then((response: [any, any]) => {
         const responseItem: ResponseItem = {
-          author: {
-            name: '',
-            lastname: '',
-          },
+          author: {},
           item: {},
         };
 

@@ -16,10 +16,7 @@ export const list = (like: string): Promise<ResponseItems> => {
 
   const prepareResponse = (response?: RawResponseList): ResponseItems => {
     const responseJson: ResponseItems = {
-      author: {
-        name: 'Pablo',
-        lastname: 'de Sosa',
-      },
+      author: {},
       categories: [],
       items: [],
     };
